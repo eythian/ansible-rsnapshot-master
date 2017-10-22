@@ -23,6 +23,14 @@
         env=yes
   with_dict: "{{ rsnapshot_crontab_env }}"
 
+- name: Configure logrotate
+  template:
+      src: logrotate.j2
+      dest: /etc/logrotate.d/rsnapshot-master
+      owner: root
+      group: root
+      mode: 0644
+
 - name: Configure cron
   cron: name={{ item.name }}
         user=root
@@ -34,3 +42,4 @@
         minute={{ item.get('minute', '*') }}
         job="{{ item.get('job', '*') }}"
   with_items: "{{ rsnapshot_crontab }}"
+

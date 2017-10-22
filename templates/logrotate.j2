@@ -1,0 +1,12 @@
+{{ rsnapshot_config_logfile }} {
+
+    weekly
+    rotate 4
+    compress
+
+    delaycompress
+    missingok
+
+    create 640 root adm
+}
+
